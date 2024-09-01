@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}viewlistedcars{% endblock %}
+
+{% block extra_css %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .car-listing {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .car-listing:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .car-listing img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .car-listing h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .car-listing p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .car-listing strong {
+            color: #333;
+        }
+        .car-listing .price {
+            color: #e74c3c;
+            font-size: 1.2em;
+        }
+    </style>
+    {% endblock %}
+
+<body>
+    {% block content %}
+    <div class="container">
+        <h1>Your Car Listings</h1>
+
+        {% if user_cars %}
+            {% for car in user_cars %}
+                <div class="car-listing">
+                    <h2>{{ car.carname }} ({{ car.modelyear }})</h2>
+                    {% if car.image %}
+                        <img src="{{ car.image.url }}" alt="Image of {{ car.carname }}">
+                    {% endif %}
+                    <p><strong>Color:</strong> {{ car.color }}</p>
+                    <p><strong>Mileage:</strong> {{ car.mileage }} km</p>
+                    <p><strong class="price">Price:</strong> ${{ car.price }}</p>
+                    <p><strong>Description:</strong> {{ car.description|default:"No description provided" }}</p>
+                    <p><strong>Status:</strong> {{ car.get_status_display }}</p>
+                    <p><strong>Date Added:</strong> {{ car.date_added|date:"Y-m-d H:i" }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>You have not listed any cars yet.</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>
+</html>

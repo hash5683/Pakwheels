@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}all car listing{% endblock %}
+
+{% block extra_css %}
+
+    <style>
+        .listing-container {
+            padding: 20px;
+        }
+
+        .car-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+        }
+
+        .car-item img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .car-item h2 {
+            margin-top: 0;
+        }
+
+        .car-item p {
+            margin: 5px 0;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+<div class="listing-container">
+<h1>All Car Listings</h1>
+{% if all_cars %}
+    {% for car in all_cars %}
+        <div class="car-item">
+            <h2>{{ car.make }} {{ car.carname }} ({{ car.modelyear }})</h2>
+            <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.carname }}">
+            <p>Price: ${{ car.price }}</p>
+            <p>Mileage: {{ car.mileage }} km</p>
+            <p>Description: {{ car.description }}</p>
+            <p>Status: {{ car.get_status_display }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No cars are currently listed.</p>
+{% endif %}
+</div>
+
+{% endblock %}
+    

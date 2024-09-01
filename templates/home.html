@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong">
+    <!-- Custom CSS for header and footer -->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body, html {
+            height: 100%;
+        }
+
+        header {
+            background-image: linear-gradient(to bottom, #000, #000080);
+            padding-bottom: 30px;
+            margin-bottom: 70px;
+            animation: fadeOut 2s forward;
+            animation-timing-function: scroll();
+        }
+        .navbar {
+            justify-content: center;
+        }
+        .navbar-nav {
+            flex-direction: row;
+        }
+        .nav-item {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .navbar-nav.ml-auto {
+            margin-left: auto;
+        }
+        .header-content {
+            text-align: center;
+            color: #fff;
+            margin-top: 120px;
+            margin-bottom: 30px;
+        }
+        .search-section-container {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically (if container height is set) */
+            margin-bottom: 30px;
+            margin-top: 50px;
+        }
+        .search-section {
+            display: flex;
+            justify-content: space-between; /* Distribute space between elements */
+            width: 730px;
+            margin-bottom: 20px;
+        }
+        .search-section input,
+        .search-section select,
+        .search-section button {
+            height: 45px;
+            border-radius: 0; /* Make edges perfectly rectangular */
+        }
+        .search-section input,
+        .search-section select {
+            flex: 1; /* Allow inputs and select to grow and fill the space */
+            
+        }
+        .search-section button {
+            flex: 0 0 auto; /* Button does not grow, maintains size */
+        }
+        .search-results ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .search-results li {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .filter-button {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .filter-button button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        body {
+            background-color: #F9F6EE; /* Updated background color of the website */
+            padding-top: 50px; /* Adjusted to ensure content is visible below the navbar if any */
+        }
+        .heading {
+            text-align: center; /* Centers the text horizontally within its container */
+            margin: 0; /* Removes default margins, if needed */
+            padding: 20px; /* Adds padding around the heading, adjust as necessary */
+        }
+        .container1 {
+            max-width: 940px; /* Adjust the maximum width of the container */
+            margin: 0 auto; /* Center the container horizontally */
+            margin-bottom: 70px;
+            border: 2px groove;
+        }
+        .row1 {
+            display: flex; /* Ensure the row uses flexbox */
+            justify-content: center; /* Center the items horizontally */
+        }
+        .card1 {
+            margin: 10px; /* Add margin around the cards */
+        }
+
+        .heading2{
+            text-align: center; /* Centers the text horizontally within its container */
+            margin: 0; /* Removes default margins, if needed */
+            padding: 20px; /* Adds padding around the heading, adjust as necessary */
+        }
+        .carousel-inner {
+            padding: 15px; /* Padding to ensure there is space around the carousel */
+        }
+
+        .container {
+            margin: 0 auto; /* Center container horizontally */
+            width: 100%; /* Adjust the width to fit within the carousel */
+            max-width: 1200px; /* Maximum width to ensure it doesn't stretch too wide */
+            display: flex;
+            flex-wrap: wrap; /* Allows images to wrap to the next line */
+            justify-content: center; /* Center content horizontally */
+            gap: 15px; /* Gap between images */
+            background-color: #F9F6EE; /* Dark pleasing background color for the container */
+            padding: 15px; /* Padding to create space around the images */
+            border-radius: 10px; /* Rounded corners for the container */
+            box-shadow: 2px;
+        }
+
+        .item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Ensures content doesn't overflow */
+            width: 250px; /* Increased width for uniformity */
+            height: 350px; /* Increased height for uniformity */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Added shadow for depth */
+        }
+
+        .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 0; /* Removed the gradient border */
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .item img:hover {
+            transform: scale(1.2); /* Slightly scale up the image on hover */
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            padding: 15px;
+            border-radius: 10px;
+            display: none; /* Initially hidden */
+            width: 90%; /* Adjusted width to fit within the image */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        .item:hover .content {
+            display: block; /* Show content on hover */
+        }
+
+        .container2 {
+            max-width: 1000px; /* Adjust the maximum width of the container */
+            margin: 0px auto; /* Center the container horizontally */
+            padding: 0 15px; /* Optional: Add some horizontal padding if needed */
+        }
+        .row {
+            display: flex; /* Ensure the row uses flexbox */
+            justify-content: center; /* Center the items horizontally */
+            flex-wrap: wrap; /* Allow wrapping of cards if needed */
+        }
+        .card {
+            margin: 10px; /* Add margin around the cards */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+        }
+        .card-body {
+            text-align: center; /* Center the text inside the card */
+        }
+        .card:hover {
+            transform: translateY(-10px); /* Move the card up slightly on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect on hover */
+        }
+        .card-link {
+            text-decoration: none; /* Remove underline from the link */
+            color: inherit; /* Inherit text color from the card */
+        }
+        .heading3{
+            text-align: center; /* Centers the text horizontally within its container */
+            margin 0; /* Removes default margins, if needed */
+            padding: 50px; /* Adds padding around the heading, adjust as necessary */
+        }
+        
+        .heading4 {
+            text-align: center; /* Centers the text horizontally within its container */
+            margin: 0; /* Removes default margins, if needed */
+            padding: 50px; /* Adds padding around the heading, adjust as necessary */
+        }
+        .container4 {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    
+        .car-listing {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            grid-gap: 20px;
+        }
+        
+        .car-item {
+            position: relative;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .car-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 0.3s ease;
+        }
+        
+        .car-item img:hover {
+            opacity: 0.7; /* Optional: reduce opacity of the image on hover */
+        }
+        
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            padding: 15px;
+            border-radius: 10px;
+            display: none; /* Initially hidden */
+            width: 90%; /* Adjusted width to fit within the image */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            transition: background 0.3s ease; /* Smooth transition for background */
+        }
+        
+        .car-item:hover .content {
+            display: block; /* Show content on hover */
+            background: rgba(0, 0, 0, 0.7); /* semi-transperent background when hovered */
+        }
+        
+        .car-item:hover .content h1,
+        .car-item:hover .content p {
+            display: block; /* Ensure text is visible when hovering */
+        }
+        
+        .content .description {
+            display: none; /* Initially hidden */
+            margin-top: 10px; /* Add some space from other content */
+        }
+        
+        .car-item:hover .content .description {
+            display: block; /* Show description on hover */
+        }
+        
+        .car-details {
+            padding: 10px;
+            text-align: center;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .car-listing {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+            }
+        }
+    
+        @media (max-width: 480px) {
+            .car-listing {
+                grid-template-columns: 1fr; /* 1 column on very small screens */
+            }
+        }
+
+        .btn-danger {
+             /* Info button color */
+            color: #fff; /* Text color */
+            border: none; /* Remove default border */
+            padding: 10px 20px; /* Padding for the button */
+            margin-top: 30px;
+            border-radius: 5px; /* Rounded corners */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Make the button fit its content */
+            font-size: 16px; /* Font size */
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+
+        .btn-danger:hover {
+            background-color: #138496; /* Darker color on hover */
+        }  
+
+        .btn-info {
+            background-color: #17a2b8; /* Info button color */
+            color: #fff; /* Text color */
+            border: none; /* Remove default border */
+            padding: 10px 20px; /* Padding for the button */
+            margin-top: 30px;
+            border-radius: 5px; /* Rounded corners */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Make the button fit its content */
+            font-size: 16px; /* Font size */
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+
+        .btn-info:hover {
+            background-color: #138496; /* Darker color on hover */
+        }       
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            font-size: 22px;
+            padding: 10px 0;
+            width: 100%;
+            position: relative;
+            margin-top: 200px;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+    
+    {% load static %}
+</head>
+<body>
+
+    <!--header-->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><b>HasHI</b></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'view_listed_cars' %}">Listed cars</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'services' %}">Services</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu1" role="button" data-toggle="dropdown" aria-expanded="false">
+                                Blogs
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a class="dropdown-item" href="{% url 'blogs' %}">New</a></li>
+                                <li><a class="dropdown-item" href="#">Trending</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu2" role="button" data-toggle="dropdown" aria-expanded="false">
+                                Auto Store
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><a class="dropdown-item" href="{% url 'autostores' %}">HasHI Store</a></li>
+                                <li><a class="dropdown-item" href="#">Sell your own products</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="dropdownMenu3" role="button" data-toggle="dropdown" aria-expanded="false">
+                                More
+                            </a>                            
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                                <li><a class="dropdown-item" href="{% url 'about' %}">About Us</a></li>
+                                <li><a class="dropdown-item" href="{% url 'contact' %}">Contact US</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'authentication:login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'authentication:logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="header-content">
+            <h1>Find Used Cars in Pakistan</h1>
+            <p>With thousands of cars, we have just the right one for you</p>
+        </div>
+
+                <!-- Search Form -->
+        <form method="GET" action="{% url 'search_cars' %}">
+            <div class="search-section-container">
+                <div class="search-section">
+                    <input type="search" name="q" placeholder="Make or Model" aria-label="Search" value="{{ query }}">
+                    <select name="city" class="form-control">
+                        <option value="">All Cities</option>
+                        <!-- Add other cities as options here -->
+                        <option value="city1">Lahore</option>
+                        <option value="city2">Karachi</option>
+                    </select>
+                    <input type="text" name="price_range" placeholder="Price Range (min-max)" aria-label="Search" value="{{ price_range }}">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Search Results -->
+        <div class="search-results">
+            {% if car_listings %}
+                <ul>
+                    {% for car in car_listings %}
+                    <div class="car-item">
+                        {% if car.image %}
+                            <img src="{{ car.image.url }}" alt="Image of {{ car.carname }}">
+                        {% endif %}
+                        <div class="content">
+                            <p><strong>Price:</strong> Rs : {{ car.price }}</p>
+                            <p><strong>Color:</strong> {{ car.color }}</p>                          
+                            <p class="description"><strong>Description:</strong> {{ car.description|default:"No description provided" }}</p>
+                        </div>
+                        <div class="car-details">
+                            <h4>{{ car.carname }} ({{ car.modelyear }})</h4>
+                            <p><strong>Status:</strong> {{ car.get_status_display }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                
+            {% endif %}
+        </div>
+            
+        <div class="filter-button">
+            <a href="{% url 'all_car_listings' %}" class="btn btn-success">Advance Filter</a>
+        </div>
+    </header>
+
+    <!-- Cards -->
+    <hr>
+    <h5 class='heading'>Sell your car on <b>HasHI</b> and get the best price</h5>
+    <div class="container1">
+        <div class="row1">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card1">
+                    <div class="card-body1">
+                        <h5 class="card-title1">Post your Ad on HasHI</h5>
+                        <p class="card-text1"><li>Post your Ad for Free in 3 Easy Steps</li>
+                            <li>Get Genuine offers from Verified Buyers</li>
+                            <li>Sell your car Fast at the Best Price</li></p>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'create_car_listing' %}" class="btn btn-danger">Post an Add</a>
+                        {% else %}
+                        <a href="{% url 'authentication:login' %}" class="btn btn-danger">Post an Add</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card1">
+                    <div class="card-body1">
+                        <h5 class="card-title1">Try HasHI Sell It For Me</h5>
+                        <p class="card-text1"><li>Dedicated Sales Expert to Sell your Car</li>
+                            <li>We Bargain for you and share the Best Offer</li>
+                            <li>We ensure Safe & Secure Transaction</li></p>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'create_car_listing' %}" class="btn btn-info">Register your Car</a>
+                            {% else %}
+                            <a href="{% url 'authentication:login' %}" class="info">Register your Car</a>
+                            {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carousel -->
+    <h4 class="heading2"><b>Trending brands in Auto indusry<b></h4>
+    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#imageCarousel" data-slide-to="1"></li>
+            <li data-target="#imageCarousel" data-slide-to="2"></li>
+            <li data-target="#imageCarousel" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="container">
+                    <div class="item">
+                        <img src="{% static 'images/1.jpg' %}" alt="Image 1">
+                        <div class="content">
+                            <h1>TOYOTA</h1>
+                            <p>Toyota is renowned for its reliability, innovation, and commitment to sustainability in automotive engineering.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/2.jpg' %}" alt="Image 2">
+                        <div class="content">
+                            <h1>Audi</h1>
+                            <p>Audi is celebrated for its luxury, performance, and cutting-edge technology in automotive design.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/3.jpg' %}" alt="Image 3">
+                        <div class="content">
+                            <h1>BMW</h1>
+                            <p>BMW is renowned for its dynamic driving experience and premium engineering excellence.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/4.jpg' %}" alt="Image 4">
+                        <div class="content">
+                            <h1>NISSAN</h1>
+                            <p>Nissan Driving innovation with a commitment to cutting-edge technology and exceptional performance.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/5.jpg' %}" alt="Image 5">
+                        <div class="content">
+                            <h1>HONDA</h1>
+                            <p>Honda is recognized for its reliable, fuel-efficient vehicles and innovative engineering.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/6.jpg' %}" alt="Image 6">
+                        <div class="content">
+                            <h1>KIA</h1>
+                            <p>Kia Redefining value with stylish, high-tech vehicles that deliver both innovation and affordability.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/7.jpg' %}" alt="Image 7">
+                        <div class="content">
+                            <h1>BENZ</h1>
+                            <p>Mercedes-Benz is acclaimed for its elegance, advanced technology, and exceptional luxury in automotive design.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/8.jpg' %}" alt="Image 8">
+                        <div class="content">
+                            <h1>SUZUKI</h1>
+                            <p>Suzuki Combining reliability and versatility with a passion for performance and adventure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="item">
+                        <img src="{% static 'images/9.jpg' %}" alt="Image 9">
+                        <div class="content">
+                            <h1>HYUNDAI</h1>
+                            <p>Hyundai is known for its innovative technology, stylish design, and exceptional value in the automotive market.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/10.jpg' %}" alt="Image 10">
+                        <div class="content">
+                            <h1>PORSCHE</h1>
+                            <p>Porsche is celebrated for its high-performance engineering, iconic design, and unmatched driving experience.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/11.jpg' %}" alt="Image 11">
+                        <div class="content">
+                            <h1>CHANGAN</h1>
+                            <p>Changan is recognized for its commitment to innovation, affordability, and quality in automotive engineering.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/12.jpg' %}" alt="Image 12">
+                        <div class="content">
+                            <h1>DFSK</h1>
+                            <p>DFSK stands out for its reliable and cost-effective vehicles, combining practical features with robust performance.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/13.jpg' %}" alt="Image 13">
+                        <div class="content">
+                            <h1>PEUGEOT</h1>
+                            <p>Peugeot is renowned for its elegant design, advanced technology, and dynamic driving experience.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/14.jpg' %}" alt="Image 14">
+                        <div class="content">
+                            <h1>BUGATTI</h1>
+                            <p>Bugatti is famed for its unparalleled luxury, extreme performance, and groundbreaking engineering in high-end supercars.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/15.jpg' %}" alt="Image 15">
+                        <div class="content">
+                            <h1>McLERN</h1>
+                            <p>McLaren is celebrated for its cutting-edge technology, exceptional performance, and striking design in high-performance sports cars.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/16.jpg' %}" alt="Image 16">
+                        <div class="content">
+                            <h1>FERRARI</h1>
+                            <p>Ferrari is iconic for its exhilarating performance, stunning design, and rich heritage in luxury sports cars.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="item">
+                        <img src="{% static 'images/17.jpg' %}" alt="Image 17">
+                        <div class="content">
+                            <h1>LAMBO</h1>
+                            <p>Lamborghini is famous for its stunning design, blistering performance, and audacious luxury in supercars.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/18.jpg' %}" alt="Image 18">
+                        <div class="content">
+                            <h1>DODGE</h1>
+                            <p>Dodge is celebrated for its bold performance, powerful engines, and distinctive, aggressive styling.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/19.jpg' %}" alt="Image 19">
+                        <div class="content">
+                            <h1>PEGANI</h1>
+                            <p>Pagani is renowned for its exquisite craftsmanship, extreme performance, and unique, artistic approach to supercars.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/20.jpg' %}" alt="Image 20">
+                        <div class="content">
+                            <h1>FORD</h1>
+                            <p>Ford is recognized for its rugged durability, innovative technology, and iconic vehicles that shape automotive history.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/21.jpg' %}" alt="Image 21">
+                        <div class="content">
+                            <h1>CHEVI</h1>
+                            <p>Chevrolet is known for its reliable performance, diverse vehicle lineup, and American automotive heritage.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/22.jpg' %}" alt="Image 22">
+                        <div class="content">
+                            <h1>A ROMEO</h1>
+                            <p>Alfa Romeo is celebrated for its Italian elegance, thrilling performance, and distinctive driving experience.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/23.jpg' %}" alt="Image 23">
+                        <div class="content">
+                            <h1>MAZDA</h1>
+                            <p>Mazda is admired for its innovative engineering, dynamic driving experience, and stylish design.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/24.jpg' %}" alt="Image 24">
+                        <div class="content">
+                            <h1>LEXUS</h1>
+                            <p>Lexus is renowned for its exceptional craftsmanship, advanced technology, and unparalleled luxury in automotive design.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="carousel-item">
+                <div class="container">
+                    <div class="item">
+                        <img src="{% static 'images/25.jpg' %}" alt="Image 25">
+                        <div class="content">
+                            <h1>ROLLS</h1>
+                            <p>Rolls-Royce is legendary for its unparalleled opulence, exquisite craftsmanship, and supreme luxury in automotive engineering.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/26.jpg' %}" alt="Image 26">
+                        <div class="content">
+                            <h1>BENTLEY</h1>
+                            <p>Bentley is acclaimed for its unrivaled luxury, meticulous craftsmanship, and exceptional performance in high-end automobiles.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/27.jpg' %}" alt="Image 27">
+                        <div class="content">
+                            <h1>CADILLAC</h1>
+                            <p>BMW is renowned for its dynamic driving experience and premium engineering excellence.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/28.jpg' %}" alt="Image 28">
+                        <div class="content">
+                            <h1>MASERATI</h1>
+                            <p>Maserati is celebrated for its blend of Italian luxury, high-performance engineering, and timeless elegance.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/29.jpg' %}" alt="Image 29">
+                        <div class="content">
+                            <h1>GMC</h1>
+                            <p>GMC is recognized for its rugged durability, versatile performance, and refined design in trucks and SUVs.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/30.jpg' %}" alt="Image 30">
+                        <div class="content">
+                            <h1>HUMMER</h1>
+                            <p>Hummer is known for its bold, rugged design and powerful performance, embodying an unstoppable off-road spirit.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/31.jpg' %}" alt="Image 31">
+                        <div class="content">
+                            <h1>RR</h1>
+                            <p>Range Rover is distinguished by its luxurious comfort, advanced off-road capabilities, and refined British elegance.</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="{% static 'images/32.jpg' %}" alt="Image 32">
+                        <div class="content">
+                            <h1>JEEP</h1>
+                            <p>Jeep is renowned for its rugged off-road capability, adventurous spirit, and iconic SUV design.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!--offerings-->
+    <h3 class='heading3'><b>HasHI</b> Offerings</h3>
+    <div class="container2">
+        <div class="row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">SELL IT FOR ME</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">AUCTION SHEET VERIFICATION</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">PARTNER WORKSHOP</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">CAR INSPECTION</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">CAR INSURANCE</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">CAR FINANCE</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">CAR REGISTRATION</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">OWNERSHIP TRANSFER</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--listing-->
+    <div class="container4">
+        <h3 class='heading4'><b>Listed Cars</b></h3>
+        <div class="car-listing">
+            {% if cars_list %}
+                {% for car in cars_list %}
+                    <div class="car-item">
+                        {% if car.image %}
+                            <img src="{{ car.image.url }}" alt="Image of {{ car.carname }}">
+                        {% endif %}
+                        <div class="content">
+                            <p><strong>Price:</strong> Rs : {{ car.price }}</p>
+                            <p><strong>Color:</strong> {{ car.color }}</p>                          
+                            <p class="description"><strong>Description:</strong> {{ car.description|default:"No description provided" }}</p>
+                        </div>
+                        <div class="car-details">
+                            <h4>{{ car.carname }} ({{ car.modelyear }})</h4>
+                            <p><strong>Status:</strong> {{ car.get_status_display }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No cars listed yet.</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'all_car_listings'%}" class="btn btn-info">View all listed cars</a>
+    </div>
+
+     <!--footer-->
+     <footer>
+        <h5>Copyright &copy; 2002-2024 HasHI (Pvt)Ltd - All rights reserved</h5>
+        <h6>Terms of Serveces | Privacy Policy</h6>
+        <h6>Reproduction of material from any HasHI.com pages without permission is strictly prohibited.</h6>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block title %}services{% endblock %}
+
+{% block extra_css %}
+
+    <style>
+        .container2 {
+            max-width: 400px; /* Adjust the maximum width of the container */
+            margin: 0 auto; /* Center the container horizontally */
+            padding: 0 15px; /* Optional: Add some horizontal padding if needed */
+        }
+        .row {
+            display: flex; /* Ensure the row uses flexbox */
+            justify-content: center; /* Center the items horizontally */
+            flex-wrap: wrap; /* Allow wrapping of cards if needed */
+        }
+        .card {
+            margin: 10px; /* Add margin around the cards */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+        }
+        .card-body {
+            text-align: center; /* Center the text inside the card */
+        }
+        .card:hover {
+            transform: translateY(-10px); /* Move the card up slightly on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect on hover */
+        }
+        .card-link {
+            text-decoration: none; /* Remove underline from the link */
+            color: inherit; /* Inherit text color from the card */
+        }
+        .heading3{
+            text-align: center; /* Centers the text horizontally within its container */
+            margin 0; /* Removes default margins, if needed */
+            padding: 50px; /* Adds padding around the heading, adjust as necessary */
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+<h3 class='heading3'><b>HasHI</b> Offerings</h3>
+    <div class="container2">
+        <div class="row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">SELL IT FOR ME</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">AUCTION SHEET VERIFICATION</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">PARTNER WORKSHOP</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">CAR INSPECTION</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">CAR INSURANCE</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">CAR FINANCE</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">CAR REGISTRATION</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <a href="#" class="card-link">
+                        <div class="card-body">
+                            <h5 class="card-title">HasHI</h5>
+                            <p class="card-text">OWNERSHIP TRANSFER</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

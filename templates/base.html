@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong">
+    <!-- Custom CSS for header and footer -->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body, html {
+            height: 100%;
+        }
+
+        header {
+            background-image: linear-gradient(to bottom, #000, #000080);
+            padding-bottom: 10px;
+            margin-bottom: 50px;
+            animation: fadeOut 2s forward;
+            animation-timing-function: scroll();
+        }
+        .navbar {
+            justify-content: center;
+        }
+        .navbar-nav {
+            flex-direction: row;
+        }
+        .nav-item {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .navbar-nav.ml-auto {
+            margin-left: auto;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            font-size: 22px;
+            padding: 10px 0;
+            width: 100%;
+            position: relative;
+            margin-top: 200px;
+            bottom: 0;
+            left: 0;
+        }
+        {% block extra_css %}{% endblock %}
+    </style>
+    
+</head>
+<body>
+    <!--header-->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><b>HasHI</b></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'view_listed_cars' %}">Listed cars</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'services' %}">Services</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu1" role="button" data-toggle="dropdown" aria-expanded="false">
+                                Blogs
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a class="dropdown-item" href="{% url 'blogs' %}">New</a></li>
+                                <li><a class="dropdown-item" href="#">Trending</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu2" role="button" data-toggle="dropdown" aria-expanded="false">
+                                Auto Store
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><a class="dropdown-item" href="{% url 'autostores' %}">HasHI Store</a></li>
+                                <li><a class="dropdown-item" href="#">Sell your own products</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="dropdownMenu3" role="button" data-toggle="dropdown" aria-expanded="false">
+                                More
+                            </a>                            
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                                <li><a class="dropdown-item" href="{% url 'about' %}">About Us</a></li>
+                                <li><a class="dropdown-item" href="{% url 'contact' %}">Contact US</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'authentication:login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'authentication:logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <!--footer-->
+    <footer>
+        <h5>Copyright &copy; 2002-2024 HasHI (Pvt)Ltd - All rights reserved</h5>
+        <h6>Terms of Serveces | Privacy Policy</h6>
+        <h6>Reproduction of material from any HasHI.com pages without permission is strictly prohibited.</h6>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
