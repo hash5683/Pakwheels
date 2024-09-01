@@ -1,5 +1,7 @@
-# Byte-compiled files
+# Python byte-compiled files
 *.pyc
+*.pyo
+*.pyd
 __pycache__/
 
 # Django-specific files
@@ -9,14 +11,25 @@ db.sqlite3
 *.py[cod]
 *.pyo
 *.pyd
-*.swp
-*.swo
 
-# Environment variables
+# Environment variable files
 .env
+.venv
+venv/
+
+# Media files
+media/
+
+# Static files
+staticfiles/
+static/
+# Django migrations
+migrations/
+
+# VS Code settings
+.vscode/
 
 # IDE/editor specific
-.vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
