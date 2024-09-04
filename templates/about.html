@@ -1,15 +1,147 @@
 {% extends 'base.html' %}
 
-{% block title %}services{% endblock %}
+{% block title %}about{% endblock %}
 
 {% block extra_css %}
 
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        .container5 {
+            background-color: #000; /* Black background for the container */
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh; /* Ensure the container has at least 80% of viewport height */
+        }
+        
+        .item {
+            position: relative;
+            width: 80%; /* Adjusted to ensure the image is appropriately sized */
+            max-width: 1200px; /* Maximum width for larger screens */
+            height: auto; /* Adjust height based on content */
+        }
+        
+        .item img {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove any extra space below the image */
+        }
+        
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center; /* Center-align text */
+        }
+        
+        .item:hover .content {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .contact-form {
+            margin: 50px auto; /* Margin between form and container */
+            max-width: 600px;
+            padding: 20px;
+            background: #f8f9fa; /* Light background for form */
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better appearance */
+            transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+        }
+
+        .contact-form:hover {
+            transform: scale(1.02); /* Slightly scale up on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border: 1px solid #ccc; /* Default border color */
+            transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+        }
+
+        .form-control:focus {
+            border-color: #343a40; /* Dark border color on focus */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Light shadow on focus */
+            outline: none; /* Remove default outline */
+        }
+
+        .btn-dark {
+            background-color: #343a40;
+            color: #fff;
+            border: none; /* Remove default border */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        .btn-dark:hover {
+            background-color: #23272b; /* Darker background color on hover */
+        }
+
+        .content-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 80%;
+            margin: 0 auto; /* Centers the container horizontally */
+            padding: 20px;
+            background-color: #f5f5f5; /* Optional: Adds a background color to the container */
+            border-radius: 8px; /* Optional: Rounds the corners of the container */
+        }
+        
+        .content-image {
+            max-width: 40%; /* Adjust the width of the image as needed */
+            height: auto; /* Maintains the aspect ratio of the image */
+            margin-right: 20px; /* Space between the image and the paragraph */
+        }
+        
+        .content-paragraph {
+            flex: 1; /* Ensures the paragraph takes up the remaining space */
+            font-size: 16px; /* Adjust the font size as needed */
+            line-height: 1.5; /* Improves readability by adding space between lines */
+            color: #000; /* Text color */
+        }
+        .h {
+            text-align: center; /* Centers the text horizontally */
+            font-weight: bold; /* Makes the text bold */
+            padding: 50px;
+        }
+
+        
     </style>
 
 {% endblock %}
 
+{% load static %}
 {% block content %}
 
+    <div class="container5">
+        <div class="item">
+            <img src="{% static 'images/14.jpg' %}" alt="Image 14">
+            <div class="content">
+                <h1>About Us</h1>
+                <p>At HasHI, we're passionate about connecting car enthusiasts with their dream vehicles. With a commitment to excellence, we provide a comprehensive platform for buying, selling, and exploring cars, ensuring a seamless experience for our users.</p>
+            </div>
+        </div>
+    </div>
+    <h1 class="h">Welcome to HasHI.com</h1>
+    <div class="content-container">
+        <img src="{% static 'images/40.png' %}" alt="Image 40" class="content-image">
+        <p class="content-paragraph">
+            At PakWheels, quality is at the heart of everything we do. We are committed to providing a seamless and trustworthy experience for our users. Our dedicated team works tirelessly to ensure that our listings and services meet the highest standards of accuracy and reliability. We prioritize customer satisfaction and continuously seek feedback to improve and adapt to your needs.
+        </p>
+    </div>
+    
 {% endblock %}
