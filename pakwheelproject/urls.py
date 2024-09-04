@@ -21,7 +21,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('' , include('pakwheel.urls')),
+    path('' , include('webpages.urls')),
     path('createlisting/' , include('carlisting.urls')),
     path('auth/', include('authentification.urls')),
     path('signin/' , include('registration.urls')), 
