@@ -1,8 +1,9 @@
-'''imprting form'''
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 
-class LoginForm(forms.Form):
-    username = forms.CharField(max_length=100)
-    password = forms.CharField(widget=forms.PasswordInput)
-
-    
+class LoginForm(AuthenticationForm):
+    """User login form"""
+    class Meta:
+        """The name of the form"""
+        model = AuthenticationForm
+        fields = ['username', 'password']
