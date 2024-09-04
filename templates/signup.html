@@ -1,118 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Design by foolishdeveloper.com -->
-  <title>Signup Page</title>
+{% extends "base2.html" %}
 
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-  <!-- Stylesheet -->
-  {% load static %}
-  <style media="screen">
-    *,
-    *:before,
-    *:after {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-    body {
-        background-image: url("{% static 'images/100.png' %}");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        height: 100vh;
-        width: 100vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #333;
-    }
-    form {
-        width: 450px;
-        background-color: #ffffff; /* Solid white background for the container */
-        border-radius: 10px;
-        backdrop-filter: blur(10px);
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-        padding: 50px 35px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    form * {
-        font-family: 'Poppins', sans-serif;
-        color: #333; /* Dark text color for contrast */
-        letter-spacing: 0.5px;
-        outline: none;
-        border: none;
-    }
-    form h3 {
-        font-size: 32px;
-        font-weight: 500;
-        line-height: 42px;
-        text-align: center;
-        color: #333; /* Dark text color for the heading */
-    }
-    label {
-        display: block;
-        margin-top: 30px;
-        font-size: 16px;
-        font-weight: 500;
-        color: #333; /* Dark text color for labels */
-    }
-    input {
-        display: block;
-        height: 40px;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.1); /* Slightly dark background for input fields */
-        border-radius: 3px;
-        padding: 0 10px;
-        margin-top: 2px;
-        font-size: 14px;
-        font-weight: 300;
-        color: #333; /* Dark text color for input fields */
-    }
-    ::placeholder {
-        color: #666; /* Light grey color for placeholder text */
-    }
-    button {
-        margin-top: 14px;
-        width: 100%;
-        background-color: #333; /* Dark button background */
-        color: #ffffff; /* White text color for the button */
-        padding: 15px 0;
-        font-size: 18px;
-        font-weight: 600;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #555; /* Slightly lighter button on hover */
-    }
-    a {
-        color: #333; /* Dark color for links */
-        text-decoration: none;
-        font-size: 14px;
-        margin-top: 15px;
-        display: inline-block;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-    ul.errorlist li {
-        color: red;
-        margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Signup</button>
-        <a href="{% url 'authentication:login' %}">Already have an account?</a>
-    </form>
-</body>
-</html>
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h2>Register Yourself</h2>
+<form method="POST" action="{% url 'registeration:signup' %}">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        <div class="errorlist">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+    <label for="{{ form.username.id_for_label }}">Username</label>
+    {{ form.username }}
+
+    <label for="{{ form.first_name.id_for_label }}">First Name</label>
+    {{ form.first_name }}
+
+    <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+    {{ form.last_name }}
+
+    <label for="{{ form.email.id_for_label }}">Email Address</label>
+    {{ form.email }}
+
+    <label for="{{ form.password1.id_for_label }}">Password</label>
+    {{ form.password1 }}
+
+    <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+    {{ form.password2 }}
+
+    <button type="submit">Register</button>
+    <a href="{% url 'authentication:login' %}">Already have an account? Log in</a>
+</form>
+{% endblock %}

@@ -41,6 +41,35 @@
         .navbar-nav.ml-auto {
             margin-left: auto;
         }
+                /* Make dropdown menus appear on hover */
+        .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Hide the dropdown menu by default */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            margin: 0.125rem 0 0;
+            font-size: 0.875rem;
+            color: #212529;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+        }
+
+        /* Optional: Add some spacing between dropdown items */
+        .dropdown-item {
+            padding: 0.25rem 1.5rem;
+            margin: 0;
+            font-size: 1rem;
+            color: #000;
+        }
+
         .header-content {
             text-align: center;
             color: #fff;
@@ -322,7 +351,7 @@
         }
 
         .btn-danger:hover {
-            background-color: #138496; /* Darker color on hover */
+            background-color: #ff0000; /* Darker color on hover */
         }  
 
         .btn-info {
@@ -354,17 +383,69 @@
             bottom: 0;
             left: 0;
         }
-    </style>
-    
+        /* Footer Container */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #000;
+        }
+
+        /* Column Style */
+        .column {
+            flex: 1 1 22%; /* Adjust width to fit 4 columns in one row */
+            margin: 10px;
+        }
+
+        /* Ensure 3 columns in the second row */
+        .container > .column:nth-child(4n+1) {
+            flex: 1 1 22%; /* Ensures that the first column of the new row fits */
+        }
+
+        /* Heading and List Style */
+        .column h6 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .column ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .column ul li {
+            margin: 5px 0;
+        }
+
+        /* Horizontal Line Style */
+        .hr {
+            background-color: #ffffff;
+            height: 1px; /* Line height */
+            border: none;
+            margin: 20px auto; /* Center align */
+            width: 80%; /* Shorten line from left and right */
+        }
+
+        /* Footer Text */
+        footer h5, footer h6 {
+            margin: 10px 0;
+        }
+
+    </style>   
     {% load static %}
 </head>
-<body>
 
+<body>
     <!--header-->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><b>HasHI</b></a>
+                <a class="navbar-brand" href="{% url 'home' %}"><b>HasHI</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -380,7 +461,7 @@
                             <a class="nav-link" href="{% url 'services' %}">Services</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu1" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu1" role="button">
                                 Blogs
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -389,7 +470,7 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu2" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu2" role="button">
                                 Auto Store
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -398,9 +479,9 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="dropdownMenu3" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="dropdownMenu3" role="button">
                                 More
-                            </a>                            
+                            </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
                                 <li><a class="dropdown-item" href="{% url 'about' %}">About Us</a></li>
                                 <li><a class="dropdown-item" href="{% url 'contact' %}">Contact US</a></li>
@@ -417,14 +498,14 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav>   
 
         <div class="header-content">
             <h1>Find Used Cars in Pakistan</h1>
             <p>With thousands of cars, we have just the right one for you</p>
         </div>
 
-                <!-- Search Form -->
+        <!-- Search Form -->
         <form method="GET" action="{% url 'search_cars' %}">
             <div class="search-section-container">
                 <div class="search-section">
@@ -503,7 +584,7 @@
                             {% if user.is_authenticated %}
                             <a href="{% url 'create_car_listing' %}" class="btn btn-info">Register your Car</a>
                             {% else %}
-                            <a href="{% url 'authentication:login' %}" class="info">Register your Car</a>
+                            <a href="{% url 'authentication:login' %}" class="btn btn-info">Register your Car</a>
                             {% endif %}
                     </div>
                 </div>
@@ -863,7 +944,7 @@
         </div>
     </div>
 
-    <!--listing-->
+    <!-- listing -->
     <div class="container4">
         <h3 class='heading4'><b>Listed Cars</b></h3>
         <div class="car-listing">
@@ -871,15 +952,15 @@
                 {% for car in cars_list %}
                     <div class="car-item">
                         {% if car.image %}
-                            <img src="{{ car.image.url }}" alt="Image of {{ car.carname }}">
+                            <img src="{{ car.image.url }}" alt="Image of {{ car.car_name }}">
                         {% endif %}
                         <div class="content">
                             <p><strong>Price:</strong> Rs : {{ car.price }}</p>
-                            <p><strong>Color:</strong> {{ car.color }}</p>                          
+                            <p><strong>Color:</strong> {{ car.color }}</p>
                             <p class="description"><strong>Description:</strong> {{ car.description|default:"No description provided" }}</p>
                         </div>
                         <div class="car-details">
-                            <h4>{{ car.carname }} ({{ car.modelyear }})</h4>
+                            <h4>{{ car.car_name }} ({{ car.model_year }})</h4>
                             <p><strong>Status:</strong> {{ car.get_status_display }}</p>
                         </div>
                     </div>
@@ -888,13 +969,131 @@
                 <p>No cars listed yet.</p>
             {% endif %}
         </div>
-        <a href="{% url 'all_car_listings'%}" class="btn btn-info">View all listed cars</a>
+        <a href="{% url 'all_car_listings' %}" class="btn btn-info">View all listed cars</a>
     </div>
 
-     <!--footer-->
-     <footer>
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if cars_list.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ cars_list.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ cars_list.number }} of {{ cars_list.paginator.num_pages }}.
+            </span>
+    
+            {% if cars_list.has_next %}
+                <a href="?page={{ cars_list.next_page_number }}">next</a>
+                <a href="?page={{ cars_list.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="column">
+                <h6>Cars By Make</h6>
+                <ul>
+                    <li>Toyota Cars for Sale</li>
+                    <li>Suzuki Cars for Sale</li>
+                    <li>Honda Cars for Sale</li>
+                    <li>Daihatsu Cars for Sale</li>
+                    <li>Mitsubishi Cars for Sale</li>
+                    <li>Nissan Cars for Sale</li>
+                    <li>Mercedes Cars for Sale</li>
+                    <li>Hyundai Cars for Sale</li>
+                    <li>BMW Cars for Sale</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h6>Cars By City</h6>
+                <ul>
+                    <li>Cars in Lahore</li>
+                    <li>Cars in Karachi</li>
+                    <li>Cars in Islamabad</li>
+                    <li>Cars in Rawalpindi</li>
+                    <li>Cars in Peshawar</li>
+                    <li>Cars in Faisalabad</li>
+                    <li>Cars in Gujranwala</li>
+                    <li>Cars in Multan</li>
+                    <li>Cars in Sialkot</li>
+                    <li>Cars in Sargodha</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h6>Explore PakWheels</h6>
+                <ul>
+                    <li>Used Cars</li>
+                    <li>Used Bikes</li>
+                    <li>New Cars</li>
+                    <li>Auto Parts & Accessories</li>
+                    <li>Cool Rides</li>
+                    <li>Forums</li>
+                    <li>Autoshow</li>
+                    <li>Sitemap</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h6>PakWheels.com</h6>
+                <ul>
+                    <li>About PakWheels.com</li>
+                    <li>Our Products</li>
+                    <li>Advertise With Us</li>
+                    <li>How To Pay</li>
+                    <li>FAQs</li>
+                    <li>Refunds & Returns</li>
+                    <li>Careers</li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+
+            <!-- Second row starts here -->
+            <div class="column">
+                <h6>Cars by Category</h6>
+                <ul>
+                    <li>Jeep</li>
+                    <li>Japanese Cars</li>
+                    <li>Imported Cars</li>
+                    <li>Automatic Cars</li>
+                    <li>Low Priced Cars</li>
+                    <li>4x4 Cars</li>
+                    <li>660cc Cars</li>
+                    <li>1000cc Cars</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h6>Cars by Body Type</h6>
+                <ul>
+                    <li>Sedan</li>
+                    <li>Hatchback</li>
+                    <li>SUV</li>
+                    <li>Crossover</li>
+                    <li>Mini Van</li>
+                    <li>Van</li>
+                    <li>Compact SUV</li>
+                    <li>MPV</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h6>Cars by Color</h6>
+                <ul>
+                    <li>White Cars</li>
+                    <li>Silver Cars</li>
+                    <li>Black Cars</li>
+                    <li>Grey Cars</li>
+                    <li>Blue Cars</li>
+                    <li>Red Cars</li>
+                    <li>Green Cars</li>
+                    <li>Gold Cars</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="hr">
         <h5>Copyright &copy; 2002-2024 HasHI (Pvt)Ltd - All rights reserved</h5>
-        <h6>Terms of Serveces | Privacy Policy</h6>
+        <h6>Terms of Services | Privacy Policy</h6>
         <h6>Reproduction of material from any HasHI.com pages without permission is strictly prohibited.</h6>
     </footer>
 
